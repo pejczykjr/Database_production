@@ -1,0 +1,16 @@
+1. "Products", "Categories", "Companies", "Operators, "Sites, "Roles" tables have to be determined at the begining. In the future Backend will allow to add fields in a specific way if needed.
+
+2. Next step before test is proper configuration. In CoreSync tester's software operator will tick his name and choose adequate test. It will lead to automated choice of a "Products" and also "Operators" fields.
+
+3. First of all CoreSync tester (Software) checks product by SN - if exists in "Entities", it will take information out of it and put to "Tests", if does not exist, field is created in "Entities" and then put to "Tests". ReleaseDate is filled with a date of manufacture if CoreSync product is not a RMA product, otherwise ReleaseDate gets null value.
+
+4. CoreSync tests are divided into 3 groups of subtests based on a correlation with each other: 
+- Cat1_2 - GW 90W, GW 60W CV, ELB Single&Dual Channel, Driver Single&Dual Channel, Driver CV
+- Cat3 - Adv. Env. Sensor, Adv. Light. Sensor, Beacon Sensor
+- Cat4 - IM
+It allows to optimize number of necessary tests to be taken and written into database. "Categories" field assigned to "Tests" field from point 2. defines adequate subtest.
+
+5. Fields in Cat1_2, Cat3 and Cat4 are filled with values from actual test. Then CoreSync tester (Software) compare them to reference values. If they are in proper range, TestResult in "Tests" is Pass, otherwise fail.
+
+Annotation
+In "Entities" SN and MAC are nullable, but CoreSync tester's software will force to put value in at least one field to ensure we have our unique ID of every product
